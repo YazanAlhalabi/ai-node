@@ -1,4 +1,4 @@
-## AI-powered Chat with ChatGPT-like Models (Markdown)
+## AI-powered Chat with ChatGPT
 
 This document outlines a basic framework for integrating a large language model (like ChatGPT) into your application to enable interactive conversations.
 
