@@ -1,4 +1,4 @@
-## AI-powered Chat with ChatGPT-like Models (Markdown)
+## AI-powered Chat with local Models
 
 This document outlines a basic framework for integrating a large language model (like ChatGPT) into your application to enable interactive conversations.
 
@@ -10,18 +10,13 @@ This document outlines a basic framework for integrating a large language model 
    $ yarn
    ```
 
-2. **Obtain API Key**
-
-   - Create an account with OpenAI ([https://openai.com/](https://openai.com/))
-   - Generate an API key and store it securely in a `.env` file:
-
-     ```
-     OPENAI_API_KEY=your_api_key
-     ```
+2. **Obtain Local model**
+   - Install Ollama: https://ollama.com
+   - After installing, open your terminal and run ollama pull <name of the model\>
 
 **Code Overview**
 
-- `openai`: Connects to the OpenAI API for accessing the language model.
+- `ollama`: Connects to your local ollama via an API
 - `promptSync`: Enables user input through the terminal prompt.
 - `boxen` & `chalk` (Optional): Customize the conversation UI with colored boxes.
 - `main` Function:

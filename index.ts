@@ -1,40 +1,32 @@
-import OpenAI from "openai"
+import ollama from "ollama"
 import chalk from "chalk"
 import boxen from "boxen"
 import promptSync from "prompt-sync"
 import "dotenv/config"
-import {
-  ChatCompletion,
-  ChatCompletionCreateParams,
-  ChatCompletionMessage,
-  ChatCompletionSystemMessageParam,
-  ChatCompletionUserMessageParam,
-} from "openai/resources/index.mjs"
 
 const prompt = promptSync()
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
 
-type Message =
-  | ChatCompletionSystemMessageParam
-  | ChatCompletionUserMessageParam
-  | ChatCompletionMessage
+type Message = {
+  role: string
+  content: string
+  images?: Uint8Array[] | string[]
+}
 
 let run = true
 const messages: Message[] = []
 
 async function main(messages: Message[]) {
-  const params: ChatCompletionCreateParams = {
-    messages: messages,
-    model: "gpt-3.5-turbo",
+  try {
+    const response = await ollama.chat({
+      model: "llama3",
+      messages: messages,
+    })
+
+    return response.message
+  } catch (error) {
+    console.log("error:", error)
+    throw new Error("Something went wrong")
   }
-
-  const chatCompletion: ChatCompletion = await openai.chat.completions.create(
-    params
-  )
-
-  return chatCompletion.choices[0].message
 }
 
 const terminalWidth = process.stdout.columns
